@@ -1,21 +1,68 @@
 #include <stdio.h>
 #include <assert.h>
+#include <string.h>
 
-int printColorMap() {
-    const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
-    const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
-    int i = 0, j = 0;
-    for(i = 0; i < 5; i++) {
-        for(j = 0; j < 5; j++) {
-            printf("%d | %s | %s\n", i * 5 + j, majorColor[i], minorColor[i]);
+
+const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
+const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
+const char* majorColorMem[25]; 
+const char* minorColorMem[25];
+unsigned char pairNumberMem[25];
+
+
+void printColor(char minorColorIndex, char majorColorIndex)
+{
+    unsigned char pairNumber = (majorColorIndex * 5 + minorColorIndex) +1;
+    
+    printf("%3d ",pairNumber);
+    pairNumberMem[pairNumber-1] = pairNumber;
+    printf("|%-8s",majorColor[majorColorIndex]);
+    majorColorMem[pairNumber-1] = majorColor[majorColorIndex];
+    printf("|%-8s\n",minorColor[minorColorIndex]);
+    minorColorMem[pairNumber-1] = minorColor[minorColorIndex];
+}
+
+void ColorMap(void) {
+    int l_majorColorIndex = 0;
+    int l_minorColorIndex = 0;
+    for(l_majorColorIndex = 0; l_majorColorIndex < 5;l_majorColorIndex++) {
+        for(l_minorColorIndex = 0;l_minorColorIndex < 5; l_minorColorIndex++) {
+            printColor(l_minorColorIndex,l_majorColorIndex);
         }
     }
-    return i * j;
 }
 
 int main() {
-    int result = printColorMap();
-    assert(result == 24);
-    printf("All is well (maybe!)\n");
+    /*test*/
+    
+    printf("Start of Test\n");
+    printf("Test case 1 White and Blue print\n");
+    printColor(0, 0);
+    assert(pairNumberMem[0] == 1);
+    assert(majorColorMem[0] == "White");
+    assert(minorColorMem[0] == "Blue");
+    
+    printf("Test case 2 White and Slate print\n");
+    printColor(4, 0);
+    assert(pairNumberMem[4] == 5);
+    assert(majorColorMem[4] == "White");
+    assert(minorColorMem[4] == "Slate");
+    
+    printf("Test case 3 Violet and Blue print\n");
+    printColor(0, 4);
+    assert(pairNumberMem[20] == 21);
+    assert(majorColorMem[20] == "Violet");
+    assert(minorColorMem[20] == "Blue");
+    
+    printf("Test case 4 Violet and Slate print\n");
+    printColor(4, 4);
+    assert(pairNumberMem[24] == 25);
+    assert(majorColorMem[24] == "Violet");
+    assert(minorColorMem[24] == "Slate");
+    
+    
+    printf("End of Test\n\n");
+    
+    ColorMap();
     return 0;
 }
