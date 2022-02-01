@@ -10,7 +10,7 @@ const char* minorColorMem[25];
 unsigned char pairNumberMem[25];
 
 
-void printColor(char minorColorIndex, char majorColorIndex)
+void printColor(unsigned int minorColorIndex, unsigned int majorColorIndex)
 {
     unsigned char pairNumber = (majorColorIndex * 5 + minorColorIndex) +1;
     
@@ -23,8 +23,8 @@ void printColor(char minorColorIndex, char majorColorIndex)
 }
 
 void ColorMap(void) {
-    int l_majorColorIndex = 0;
-    int l_minorColorIndex = 0;
+    unsigned int l_majorColorIndex = 0;
+    unsigned int l_minorColorIndex = 0;
     for(l_majorColorIndex = 0; l_majorColorIndex < 5;l_majorColorIndex++) {
         for(l_minorColorIndex = 0;l_minorColorIndex < 5; l_minorColorIndex++) {
             printColor(l_minorColorIndex,l_majorColorIndex);
@@ -39,26 +39,27 @@ int main() {
     printf("Test case 1 White and Blue print\n");
     printColor(0, 0);
     assert(pairNumberMem[0] == 1);
-    assert(majorColorMem[0] == "White");
-    assert(minorColorMem[0] == "Blue");
+    
+    assert(strcmp(majorColorMem[0],"White") == 0);
+    assert(strcmp(minorColorMem[0],"Blue") == 0);
     
     printf("Test case 2 White and Slate print\n");
     printColor(4, 0);
     assert(pairNumberMem[4] == 5);
-    assert(majorColorMem[4] == "White");
-    assert(minorColorMem[4] == "Slate");
+    assert(strcmp(majorColorMem[0],"White") == 0);
+    assert(strcmp(minorColorMem[0],"Slate") == 0);
     
     printf("Test case 3 Violet and Blue print\n");
     printColor(0, 4);
     assert(pairNumberMem[20] == 21);
-    assert(majorColorMem[20] == "Violet");
-    assert(minorColorMem[20] == "Blue");
+    assert(strcmp(majorColorMem[0],"Violet") == 0);
+    assert(strcmp(minorColorMem[0],"Blue") == 0);
     
     printf("Test case 4 Violet and Slate print\n");
     printColor(4, 4);
     assert(pairNumberMem[24] == 25);
-    assert(majorColorMem[24] == "Violet");
-    assert(minorColorMem[24] == "Slate");
+    assert(strcmp(majorColorMem[0],"Violet") == 0);
+    assert(strcmp(minorColorMem[0],"Slate") == 0);
     
     
     printf("End of Test\n\n");
