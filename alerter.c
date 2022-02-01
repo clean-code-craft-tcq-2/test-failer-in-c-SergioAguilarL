@@ -37,7 +37,7 @@ float farenheit2Celcius(float farenheit)
 
 void alertInCelcius(float farenheit) {
     int celcius;
-    celcius = farenheit2Celcius(farenheit)
+    celcius = farenheit2Celcius(farenheit);
     int returnCode = networkAlertStub(celcius);
     if (returnCode != E_OK) {
         // non-ok response is not an error! Issues happen in life!
